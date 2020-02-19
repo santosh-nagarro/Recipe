@@ -8,10 +8,10 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent {
   title = 'recipe';
-  loadedFetaure = 'recipe';
+  loadedFeature = 'recipe';
 
   onNavigate(feature: string) {
-    this.loadedFetaure = feature;
+    this.loadedFeature = feature;
   }
 
 }

@@ -15,11 +15,11 @@
       (window:resize)="collapsed = true">
       <ul class="nav navbar-nav">
         <li><a href="#"
-            routerLink="/recipe">Recipe</a></li>
-        <li routerLinkActive="active"><a href="#"
-            routerLink="/auth">Auth</a></li>
-        <li routerLinkActive="active"><a href="#"
-            routerLink="/shopping-list">Shopping List</a></li>
+            (click)="onSelect('recipe')">Recipes</a></li>
+        <li><a href="#"
+            (click)="onSelect('shopping-list')">Shopping List</a></li>
+        <!-- <li><a href="#" (click)="onSelect('shopping-list')">Auth</a></li> -->
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown"
