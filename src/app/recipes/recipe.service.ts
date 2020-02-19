@@ -7,7 +7,6 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
   providedIn: 'root'
 })
 export class RecipeService {
-  recipeSelected = new EventEmitter<Recipe>();
   private recipes: Recipe[] = [
     new Recipe('The test Recipe',
       'This is description',
@@ -21,18 +20,21 @@ export class RecipeService {
       'This is another description',
       'https://www.cookingclassy.com/wp-content/uploads/2019/05/fiesta-rice-recipe-7-768x1152.jpg',
       [
-        new Ingredient('meat', 5),
-        new Ingredient('Sugar', 25)
+        new Ingredient('Potato', 50),
+        new Ingredient('onion', 55)
       ]
     )
   ];
 
   constructor(private slService: ShoppingListService) { }
 
-  getRecipe() {
+  getRecipes() {
     return this.recipes.slice();
   }
 
+  getRecipe(index: number) {
+    return this.recipes.slice()[index];
+  }
   toAddIngredientToSoppinglist(ingredient: Ingredient[]) {
     this.slService.addIngredientstoList(ingredient);
   }
