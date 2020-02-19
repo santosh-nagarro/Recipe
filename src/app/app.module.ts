@@ -14,6 +14,8 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { HighlightDirective } from './shared/directives/highlight.directive';
 import { dropDownDirective } from './shared/directives/dropdown.directives';
 import { AuthComponent } from './authentication/auth.component';
+import { RecipesStartComponent } from './recipes/recipes-start/recipes-start.component';
+import { RecipesEditComponent } from './recipes/recipes-edit/recipes-edit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { AuthComponent } from './authentication/auth.component';
     ShoppingEditComponent,
     HighlightDirective,
     dropDownDirective,
-    AuthComponent
+    AuthComponent,
+    RecipesStartComponent,
+    RecipesEditComponent
   ],
   imports: [
     BrowserModule,

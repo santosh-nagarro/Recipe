@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from './recipe-list/recipe.model';
-import { RecipeService } from './recipe.service';
-import { Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-recipes',
@@ -9,14 +6,10 @@ import { Subscriber } from 'rxjs';
   styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent implements OnInit {
-  selectedRecipe: Recipe;
-  constructor(private recipeService: RecipeService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.recipeService.recipeSelected
-      .subscribe((recipe: Recipe) => {
-        this.selectedRecipe = recipe;
-      })
+
   }
 
 }
