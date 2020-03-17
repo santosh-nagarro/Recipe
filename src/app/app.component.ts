@@ -1,36 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Post } from './post.model';
+import { Subscription } from 'rxjs';
+import { PostService } from './posts.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  loadedPosts = [];
+export class AppComponent implements OnInit, OnDestroy {
+  loadedPosts: Post[] = [];
+  isFething = false;
+  error = null;
+  private errorSub: Subscription;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private postService: PostService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.errorSub = this.postService.error.subscribe(errorMessage => {
+      this.error = errorMessage;
+    });
+    this.onFetchPosts();
+  }
 
-  onCreatePost(postData: { title: string; content: string }) {
-    // Send Http request
-    // this.http
-    //   .post(
-    //     'https://ng-complete-guide-12de5.firebaseio.com/posts.json',
-    //     postData
-    //   )
-    //   .subscribe(responseData => {
-    //     console.log(responseData);
-    //   });
-    console.log(postData);
+  onCreatePost(postData: Post) {
+    this.postService.createAndStorePost(postData.title, postData.content);
   }
 
   onFetchPosts() {
-    // Send Http request
+    this.isFething = true;
+    this.postService.fetchPost().subscribe(posts => {
+      this.isFething = false;
+      this.loadedPosts = posts;
+    }, error => {
+      this.isFething = false;
+      this.error = error.message;
+    });
   }
 
   onClearPosts() {
-    // Send Http request
+    this.postService.deletePosts().subscribe(() => {
+      this.loadedPosts = [];
+    });
   }
+
+  onHandleError() {
+    this.error = null;
+  }
+  ngOnDestroy() {
+    this.errorSub.unsubscribe();
+  }
+
+
 }
